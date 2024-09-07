@@ -23,8 +23,8 @@ const userSchem = new mongoose.Schema({
         type:Boolean,
         default:false,
     },
-    resetPasswordTokenExpritesAt: String,
-    resetPasswordExpritesAt:Date,
+    resetPasswordToken: String,
+    resetPasswordTokenExpritesAt:Date,
     vereficationToken:String,
     verficationTokenExpiresAt:Date,
 }, {timeseries: true});

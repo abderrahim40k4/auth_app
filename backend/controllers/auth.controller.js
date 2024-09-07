@@ -118,23 +118,42 @@ export const forgetPassword = async (req, res) => {
         const resetPasswordToken = crypto.randomBytes(32).toString("hex");
         const resetPasswordTokenExpiredDate = Date.now() + 1 * 60 * 60 * 1000;
         user.resetPasswordToken = resetPasswordToken;
-        user.resetPasswordTokenExpritesAt = resetPasswordTokenExpiredDate;
+        user.resetPasswordTokenExpritesAt = resetPasswordTokenExpritesAt;
 
         await user.save();
         await sendPasswordResetEmail(user.email, `${process.env.CLIENT_URL}/reset-password/${resetPasswordToken}`)
     } catch (error) {
-        
+        console.log("Error in forgotPassword ", error);
+		res.status(400).json({ success: false, message: error.message });
     }
 }
 
 export const resetPassword = async (req, res) => {
-    const {email, password} = req.body;
+    const {token} = req.params;
+    const {password} = req.body;
 
     try {
-        const user = await User.findOne({email});
-        
-        
+        const user = await User.findOne({
+            token,
+            resetPasswordTokenExpritesAt : {$gt: Date.now()
+            }});
+
+        if(!user){
+            res.status(400).json({success:false, message:"invalid Token or expired Date"})
+        }
+
+        //update password
+        const hashPassword = bcryptjs.hash(password, 10)
+        user.password = hashPassword;
+        user.resetPasswordToken = undefined;
+        user.resetPasswordTokenExpritesAt = undefined;
+        user.save();
+
+        await sendResetSuccessEmail(user.email)
+        res.status(200).json({ success: true, message: "Password reset successful" });
     } catch (error) {
+        console.log("Error in resetPassword ", error);
+		res.status(400).json({ success: false, message: error.message });
         
     }
 }
@@ -145,4 +164,18 @@ export const logout = async (req, res) =>{
         success:true,
         message:"logout successfaly :)"
     })
+};
+
+export const checkAuth = async (req, res) => {
+	try {
+		const user = await User.findById(req.userId).select("-password");
+		if (!user) {
+			return res.status(400).json({ success: false, message: "User not found" });
+		}
+
+		res.status(200).json({ success: true, user });
+	} catch (error) {
+		console.log("Error in checkAuth ", error);
+		res.status(400).json({ success: false, message: error.message });
+	}
 };
