@@ -15,9 +15,8 @@ app.get("/", (req, res) =>{
     res.send("hello world");
 });
 
-
-app.use("/api/auth", authRoutes);
 app.use(express.json());
+app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () =>{
     connectDB();

@@ -37,7 +37,7 @@ export const signup = async (req, res) =>{
             user:{
                 ...user._doc,
                 password:undefined,
-            },
+            }
          })
         
     } catch (error) {
@@ -46,11 +46,11 @@ export const signup = async (req, res) =>{
 };
 
 export const verifyEmail = async (res, req)=> {
-    const { code } = req.body;
+    const {verfingCode} = req.body;
     try {
         const user = await User.findOne(
             {
-                vereficationToken:code,
+                vereficationToken:verfingCode,
                 verficationTokenExpiresAt:{$gt: Date.now()},
             }
         )
@@ -77,8 +77,42 @@ export const verifyEmail = async (res, req)=> {
 }
 
 export const login = async (req, res) =>{
-    res.send("login route");
+    const {email, password} = req.body;
+    try {
+        const user = User.findOne({email});
+        if(!user){
+            return res.status(400).json({success: false, message:"invalid information :("})
+        }
+        const validPassword = await bcryptjs.compare(password, user.password);
+        if(!validPassword){
+            return res.status(400).json({success: false, message:"invalid information :("})
+        }
+
+        generatTokenAndSetCookie(res, user._id);
+        user.lastLogin = new Date();
+        user.save();
+        res.status(201).json({
+            success:true,
+            message:"login successfuly",
+            user:{
+                ...user._doc,
+                password:undefined,
+            }});
+
+    } catch (error) {
+        console.log( "error on login ",error.message)
+        res.status(400).json({success: false, message: error.message})
+    }
 };
+
+export const forgetPassword = async => {
+    
+    try {
+        
+    } catch (error) {
+        
+    }
+}
 
 export const logout = async (req, res) =>{
     res.clearCookie("token");
