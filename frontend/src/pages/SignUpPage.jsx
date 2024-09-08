@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
 import { Loader, Lock, Mail, User } from "lucide-react";
 
 import {
@@ -66,7 +67,7 @@ const SignUpPage = () => {
                 <CardContent>
 
                     <Form {...form}>
-                        <form  className="space-y-8">
+                        <form className="space-y-8">
                             <FormField
                                 control={form.control}
                                 name="username"
@@ -106,6 +107,14 @@ const SignUpPage = () => {
                             <Button type="submit" className="w-full bg-blue-500">Submit</Button>
                         </form>
                     </Form>
+                    <div className='px-8 py-4 bg-gray-800 bg-opacity-50 flex justify-center'>
+                        <p className='text-sm text-gray-400'>
+                            Already have an account?{" "}
+                            <Link to={"/login"} className='text-blue-400 hover:underline'>
+                                Login
+                            </Link>
+                        </p>
+                    </div>
 
                 </CardContent>
                 <CardFooter>
