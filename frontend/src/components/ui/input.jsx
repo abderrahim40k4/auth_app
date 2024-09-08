@@ -2,9 +2,10 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-const Input = React.forwardRef(({ className, type, placeholder , ...props }, ref) => {
+const Input = React.forwardRef(({ className, type, placeholder, ...props }, ref) => {
   return (
     (<input
+      {...props}
       type={type}
       placeholder={placeholder}
       className={cn(
