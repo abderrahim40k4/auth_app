@@ -62,7 +62,7 @@ const SignUpPage = () => {
 			overflow-hidden'
 ">
                 <CardHeader className="inline-flex justify-center items-center text-center w-full">
-                    <CardTitle className="text-center w-full text-4xl text-blue-500 font-bold">LOG IN</CardTitle>
+                    <CardTitle className="text-center w-full text-4xl text-blue-500 font-bold">Sign Up</CardTitle>
                 </CardHeader>
                 <CardContent>
 
