@@ -26,7 +26,7 @@ import PasswordStrengthMeter from "../components/PasswordStrengthMeter";
 const SignUpPage = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState("123");
     const navigate = useNavigate();
 
     return (
@@ -83,7 +83,7 @@ const SignUpPage = () => {
                             </FormItem>
                             {/* {error && <p className='text-red-500 font-semibold mt-2'>{error}</p>} */}
                             <PasswordStrengthMeter password={password} />
-                            <Button type="submit" className="w-full bg-blue-500">Submit</Button>
+                            <Button type="submit" className="w-full bg-blue-500"><Link to={"/email-verification"}>Submit</Link></Button>
                         </form>
                     </Form>
 

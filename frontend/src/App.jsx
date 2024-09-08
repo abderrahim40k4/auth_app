@@ -3,6 +3,7 @@ import  FlotingBoble from './components/FlotingBoble'
 import { Route, Routes } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
+import EmailVerificationPage from './pages/EmailVerificationPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,6 +21,7 @@ function App() {
           <Route path='/sign-up' element={<SignUpPage/>}/>
 
           <Route path='/log-in' element={<LoginPage/>}/>
+          <Route path='/email-verification' element={<EmailVerificationPage/>}/>
         </Routes>
       </div>
     </>

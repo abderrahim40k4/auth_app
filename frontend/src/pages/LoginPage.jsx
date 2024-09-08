@@ -85,7 +85,7 @@ const LoginPage = () => {
                                     </FormItem>
                                 )}
                             />
-                            <Button type="submit" className="w-full bg-blue-500">Submit</Button>
+                            <Button type="submit" className="w-full bg-blue-500"> <Submit></Submit></Button>
                         </form>
                     </Form>
                     <div className='px-8 py-4 bg-gray-800 bg-opacity-50 flex justify-center'>
