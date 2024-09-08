@@ -37,8 +37,7 @@ const formSchema = z.object({
     }),
 })
 const LoginPage = () => {
-    const form = useForm({
-        resolver: zodResolver(formSchema),
+    const form = useForm({formSchema,
         defaultValues: {
             useremail: "",
             userpasssword: "",
@@ -92,7 +91,7 @@ const LoginPage = () => {
                     <div className='px-8 py-4 bg-gray-800 bg-opacity-50 flex justify-center'>
                         <p className='text-sm text-gray-400'>
                             Dont have an account?{" "}
-                            <Link to={"/signup"} className='text-blue-400 hover:underline'>
+                            <Link to={"/sign-up"} className='text-blue-400 hover:underline'>
                                 Sign Up
                             </Link>
                         </p>
