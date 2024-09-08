@@ -85,7 +85,10 @@ const LoginPage = () => {
                                     </FormItem>
                                 )}
                             />
-                            <Button type="submit" className="w-full bg-blue-500"> <Submit></Submit></Button>
+                            <div className='text-right w-full font-bold text-sm text-blue-500'>
+                                <Link to={"/forgot-password"}>Forgot Password?</Link>
+                            </div>
+                            <Button  className="w-full bg-blue-500"> Submite </Button>
                         </form>
                     </Form>
                     <div className='px-8 py-4 bg-gray-800 bg-opacity-50 flex justify-center'>

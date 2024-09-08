@@ -4,6 +4,8 @@ import { Route, Routes } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
 import EmailVerificationPage from './pages/EmailVerificationPage'
+import ForgotPasswordPage from './pages/ForgotPasswordPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,6 +24,8 @@ function App() {
 
           <Route path='/log-in' element={<LoginPage/>}/>
           <Route path='/email-verification' element={<EmailVerificationPage/>}/>
+          <Route path='/forgot-password' element={<ForgotPasswordPage/>}/>
+          <Route path='/reset-password' element={<ResetPasswordPage/>}/>
         </Routes>
       </div>
     </>
