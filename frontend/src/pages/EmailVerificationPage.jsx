@@ -4,7 +4,7 @@ import OTPVerfication from '@/components/otpVerfication'
 
 const EmailVerificationPage = () => {
     return (
-        <OTPVerfication/>
+        <OTPVerfication title="Email verfiction"/>
 
     )
 }

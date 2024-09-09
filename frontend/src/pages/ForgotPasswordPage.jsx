@@ -4,7 +4,7 @@ import OTPVerfication from '@/components/otpVerfication'
 const ForgotPasswordPage = () => {
   return (
     <div>
-        <OTPVerfication/>
+        <OTPVerfication title="forgot password"/>
     </div>
   )
 }
