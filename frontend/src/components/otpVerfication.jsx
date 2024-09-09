@@ -15,7 +15,37 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+
+
 const OTPVerfication = () => {
+
+    const [code, setCode] = useState(["", "", "", "", "", "", "",""]);
+	const inputRefs = useRef([]);
+	const navigate = useNavigate();
+
+
+    const handleSubmit = async (e) => {
+		e.preventDefault();
+		const verificationCode = code.join("");
+		try {
+			await verifyEmail(verificationCode);
+			navigate("/");
+			toast.success("Email verified successfully");
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+
+    useEffect(() => {
+		if (code.every((digit) => digit !== "")) {
+			handleSubmit(new Event("submit"));
+		}
+	}, [code]);
+
     return (
         <div>
             <div>
@@ -25,7 +55,8 @@ const OTPVerfication = () => {
                         <CardDescription className="w-full font-bold text-gray-300 text-sm ">Enter the code verfiction you recived from Email</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <InputOTP maxLength={8}>
+                        <InputOTP maxLength={8} 
+                        >
                             <InputOTPGroup>
                                 <InputOTPSlot index={0} />
                                 <InputOTPSlot index={1} />
@@ -40,7 +71,7 @@ const OTPVerfication = () => {
                                 <InputOTPSlot index={7} />
                             </InputOTPGroup>
                         </InputOTP>
-                        <Button className="w-full bg-blue-500 bottom-10 my-11" type="submit"  >Submit</Button>
+                        <Button className="w-full bg-blue-500 bottom-10 my-11" type="submit">Submit</Button>
                     </CardContent>
                 </Card>
 
